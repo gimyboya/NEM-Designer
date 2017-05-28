@@ -1,66 +1,38 @@
 <template>
-  <el-row type="flex" class="row-bg" justify="center" align="middle">
+  <el-row class="row-bg home-container">
     
-    <el-col :span="10">
+    <el-col :span="10" class="item">
     
       <el-tabs v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="Simple Wallet" name="prng">
-          
-          <el-row type="flex" class="row-bg" justify="center">
-            <el-col :span="16">
-              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="70px" label-position="top" class="information">
-          
-                  <el-form-item label="Wallet name" prop="wname">
-                    <el-input type="text" v-model="ruleForm.wname" auto-complete="off"></el-input>
-                  </el-form-item>
-          
-                  <el-form-item label="Wallet password" prop="pass">
-                    <el-input :type="inputype" v-model="ruleForm.pass" auto-complete="off">
-                      <el-button slot="append" @click="showpass">
-                        <icon :name="icon" :color="icolor"></icon>
-                      </el-button>
-                    </el-input>
-                  </el-form-item>
+        <el-tab-pane label="Simple Wallet" name="prng"></el-tab-pane>
 
-                  <el-form-item>
-                    <el-button type="success" @click="submitForm('ruleForm')">Next</el-button>
-                  </el-form-item>
-
-              </el-form>
-            </el-col>
-          </el-row>
-
-        </el-tab-pane>
-
-        <el-tab-pane label="Brain Wallet" name="brain">
-          
-          <el-row type="flex" class="row-bg" justify="center">
-            <el-col :span="16">
-              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="70px" label-position="top" class="information">
-          
-                <el-form-item label="Wallet name" prop="wname">
-                  <el-input type="text" v-model="ruleForm.wname" auto-complete="off"></el-input>
-                </el-form-item>
-          
-                <el-form-item label="Wallet password" prop="pass">
-                  <el-input :type="inputype" v-model="ruleForm.pass" auto-complete="off">                
-                    <el-button slot="append" @click="showpass">
-                       <icon :name="icon" :color="icolor"></icon>
-                    </el-button>
-                  </el-input>
-                </el-form-item>
-          
-                <el-form-item>
-                  <el-button type="success" @click="next('ruleForm')">Next</el-button>
-                </el-form-item>
-
-              </el-form>
-            </el-col>
-          </el-row>
-
-        </el-tab-pane>
+        <el-tab-pane label="Brain Wallet" name="brain"></el-tab-pane>
       </el-tabs>
-    
+
+      <el-row type="flex" class="row-bg" justify="center">
+        <el-col :span="16">
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="70px" label-position="top" class="information">
+      
+            <el-form-item label="Wallet name" prop="wname">
+              <el-input type="text" v-model="ruleForm.wname" auto-complete="off"></el-input>
+            </el-form-item>
+      
+            <el-form-item label="Wallet password" prop="pass">
+              <el-input :type="inputype" v-model="ruleForm.pass" auto-complete="off">
+                <el-button slot="append" @click="showpass">
+                  <icon :name="icon" :color="icolor"></icon>
+                </el-button>
+              </el-input>
+            </el-form-item>
+      
+            <el-form-item>
+              <el-button type="success" @click="submitForm('ruleForm')">Next</el-button>
+            </el-form-item>
+      
+          </el-form>
+        </el-col>
+      </el-row>
+
     </el-col>
 
   </el-row>
@@ -112,7 +84,7 @@ export default {
           this.$router.replace('edit');
           this.$store.commit('setName', this.ruleForm.wname);
           this.$store.commit('setPassword', this.ruleForm.pass);
-          this.$store.commit('setWtype', this.inputype);
+          this.$store.commit('setWtype', this.activeName);
         } else {
           console.log('error submit!!');
           return false;
@@ -126,5 +98,13 @@ export default {
 };
 </script>
 <style>
-
+.home-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.item{
+  align-self: center;
+}
 </style>
