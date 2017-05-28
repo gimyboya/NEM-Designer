@@ -20,12 +20,12 @@
     data() {
       return {
         successTip: {
-          title: '图片导入成功',
-          desc: '1.按住鼠标左键拖动图片； 2.滑动滚轮缩放至最佳视角；3.鼠标双击切换至截图工具；',
+          title: 'Image imported successfully',
+          desc: '1.Hold down the left mouse button to drag the picture; 2. Slide the wheel zoom to the best viewing angle; 3. Double click to switch to the screenshot tool；',
         },
         importTip: {
-          title: '请导入图片',
-          desc: '1.可直接拖入图片至下方区域； 2.可点击下方导入按钮选取图片；',
+          title: 'import a picture',
+          desc: '1.Drag & drop 2.pick a file；',
         },
       };
     },
@@ -37,7 +37,7 @@
   };
 </script>
 
-<style lang="css">
+<style>
   .el-alert {
     position: absolute;
     z-index: 1;

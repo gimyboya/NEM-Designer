@@ -101,24 +101,5 @@
   };
 </script>
 <style>
-  .action-list { height: 100%; }
-  .action-list .btn { display: inline-block; width: 60px; height: 60px; line-height: 60px; background: #324057; }
-  .action-list .close-btn,
-  .action-list .open-btn { width: 30px; background: #2b384d; }
-  .action-list .btn:hover { background: #1f2f3d; }
-  .action-list .github-btn:hover { background: #7D5CFF; }
-  .action-list .btn .icon { display: inline-block; width: 16px; height: 16px; }
-  .action-list .save-btn .icon { background: url('../../../static/sprites/save.png'); }
-  .action-list .delete-btn .icon { background: url('../../../static/sprites/delete.png'); }
-  .action-list .cancel-btn .icon { background: url('../../../static/sprites/cancel.png'); }
-  .action-list .croping-btn .icon { background: url('../../../static/sprites/ok.png'); }
-  .action-list .crop-btn .icon { background: url('../../../static/sprites/crop.png'); }
-  .action-list .move-btn .icon { background: url('../../../static/sprites/move.png'); }
-  .action-list .rotater-btn .icon { background: url('../../../static/sprites/rotater.png'); }
-  .action-list .rotatel-btn .icon { background: url('../../../static/sprites/rotatel.png'); }
-  .action-list .flip-horizontal-btn .icon { background: url('../../../static/sprites/flip_horizontal.png'); }
-  .action-list .flip-vertical-btn .icon { background: url('../../../static/sprites/flip_vertical.png'); }
-  .action-list .close-btn .icon { background: url('../../../static/sprites/left-close.png'); }
-  .action-list .open-btn .icon { background: url('../../../static/sprites/right-open.png'); }
-  .action-list .github-btn .icon { background: url('../../../static/sprites/github.png'); }
+ 
 </style>

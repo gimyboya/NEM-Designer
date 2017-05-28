@@ -506,21 +506,5 @@
   };
 </script>
 
-<style lang="css">
-  .canvas {
-    width: 100%;
-    height: 100%;
-  }
-  .canvas .editor {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .canvas .editor > img {
-    display: block;
-    max-width: 95%;
-    max-height: 95%;
-    margin: auto;
-    vertical-align: middle;
-  }
+<style>
 </style>

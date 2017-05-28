@@ -1,6 +1,6 @@
 <template>
   <div class="upload" v-if="!uploaded" @change="change" @dragover="dragover" @drop="drop">
-    <el-dialog title="图片导入" :visible.sync="dialogTableVisible">
+    <el-dialog title="Import an image" :visible.sync="dialogTableVisible">
       <el-row :gutter="10">
         <el-col :span="8" v-for="item in preChoiseImg">
           <img class="select-img"
@@ -11,7 +11,7 @@
               @click="selectImg">
         </el-col>
         <el-col :span="8">
-          <div class="upload-btn J-upload" title="选择本地图片">
+          <div class="upload-btn J-upload" title="Select local image">
             <span class="upload-icon"></span>
             <input id="file" type="file" accept="image/*" class="sr-only">
           </div>
@@ -20,7 +20,7 @@
     </el-dialog>
     <div class="import-area J-import" @click="dialogTableVisible = true">
       <span class="icon"></span>
-      <p class="tip">拖入图片或 <span class="browse">点击导入</span></p>
+      <p class="tip">Dragged into the picture or <span class="browse">Click Import</span></p>
     </div>
   </div>
 </template>
@@ -44,7 +44,7 @@
             width: '1600',
             height: '900',
             name: 'test-1.jpg',
-            src: './static/image/test-1.jpg',
+            src: './assets/img/Jabo_Paper_Wallet_1200-480.jpg',
           },
           {
             width: '1600',
@@ -111,8 +111,8 @@
             if (imgSize < imgMaxSize) {
               if (imgSize > imgWarnSize) {
                 this.$notify({
-                  title: '提示',
-                  message: '图片体积过大 处理速度可能会下降',
+                  title: 'prompt',
+                  message: 'Image size is too large Processing speed may drop',
                   type: 'warning',
                   duration: 4000,
                   offset: 120,
@@ -137,14 +137,14 @@
               reader.readAsDataURL(file);
             } else {
               this.$message({
-                message: '图片体积须低于3M 请重新选择',
+                message: 'Picture size should be lower than 3M Please re-select',
                 type: 'warning',
               });
               callback();
             }
           } else {
             this.$message({
-              message: '请选择图片文件',
+              message: 'Please select an image file',
               type: 'warning',
             });
             callback();
@@ -197,92 +197,5 @@
 </script>
 
 <style>
-  .upload {
-    width: 100%;
-    height: 100%;
-  }
-  .import-area {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -120px -150px;
-    box-sizing: border-box;
-    width: 300px;
-    height: 200px;
-    background: #2b3342;
-    border: 2px dashed #7d7d7d;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.1s;
-  }
 
-  .import-area:hover {
-    background: #324057;
-    border-color: #ccc;
-  }
-
-  .import-area .icon {
-    display: inline-block;
-    margin-top: 20px;
-    width: 128px;
-    height: 128px;
-    background: url('../../../../static/sprites/upload.png') no-repeat;
-  }
-
-  .import-area .tip {
-    margin: 0;
-    text-align: center;
-    font-size: 14px;
-    color: #999;
-  }
-
-  .import-area .tip .browse {
-    color: #7D5CFF;
-  }
-
-  .import-area:hover .browse {
-    text-decoration: underline;
-  }
-
-  .el-row {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-  .el-col {
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  .el-dialog__body {
-    padding: 20px;
-  }
-  .select-img,
-  .upload-btn {
-    margin-bottom: 10px;
-    width: 100%;
-    height: 108px;
-    vertical-align: top;
-  }
-  .upload-btn {
-    position: relative;
-    line-height: 118px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    border: 3px dashed #ccc;
-  }
-  .upload-icon {
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    background: url('../../../../static/sprites/plus.png') no-repeat;
-  }
-  .el-dialog__header {
-    text-align: left;
-  }
-  .v-modal {
-    opacity: 0.6;
-  }
-  .sr-only {
-    cursor: pointer;
-  }
 </style>

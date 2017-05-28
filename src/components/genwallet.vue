@@ -1,7 +1,7 @@
 <template>
-  <el-row class="row-bg home-container">
+  <el-row class="row-bg">
     
-    <el-col :span="10" class="item">
+    <el-col :span="10">
     
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="Simple Wallet" name="prng"></el-tab-pane>
@@ -98,13 +98,4 @@ export default {
 };
 </script>
 <style>
-.home-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.item{
-  align-self: center;
-}
 </style>

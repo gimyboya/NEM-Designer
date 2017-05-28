@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="图片导入" :visible.sync="dialogTableVisible">
+  <el-dialog title="Import image" :visible.sync="dialogTableVisible">
     <p>helloworld</p>
   </el-dialog>
 </template>

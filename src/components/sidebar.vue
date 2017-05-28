@@ -2,7 +2,7 @@
 <div>
   <el-row class="tac custom-scrollbar" id="vpic_sidebar">
     <el-col :span="24">
-      <el-menu unique-opened class="el-menu-vertical-demo" theme="dark">
+      <el-menu unique-opened class="el-menu-vertical-demo">
         <el-submenu index="1">
           <template slot="title"><i class="my-icon-cut my-icon"></i>裁切</template>
           <el-submenu index="1-1">
@@ -351,97 +351,5 @@
 </script>
 
 <style>
-  .fl { float: left; }
-  .fr { float: right; }
-  .clearfix:after { display: block; content: ''; clear: both; }
-  .el-menu { border-radius: 0; }
-  .el-menu-item-group__title { padding: 0; }
-  .el-submenu .el-menu-item { position: relative; padding: 12px 30px !important; border-bottom: 1px solid #3c3f43; border-top: 1px solid #3c3f43; height: 80px; }
-  .el-submenu .el-menu-item .val-tag { display: inline;  margin: 0; padding: 0; line-height: 1; font-size: 14px; color: #828890; }
-  /*.el-menu */
-  .el-submenu__title { padding-left: 80px !important; height: 60px; text-align: left; font-size: 18px; }
-  .el-submenu__icon-arrow { right: 30px; }
 
-  .el-slider__runway { margin: 18px 0; }
-  .el-slider__runway, .el-slider__bar { height: 3px; }
-  .el-slider__button-wrapper { line-height: 36px; }
-  .el-slider__button { width: 11px; height: 11px; }
-
-  .v-submenu { font-size: 14px; }
-  .my-icon { display: inline-block; vertical-align: sub; margin-right: 10px; width: 24px; height: 24px; }
-  .my-icon-cut { background: url('../../static/sprites/cut.png'); background-size: 24px 24px; }
-  .my-icon-edit { background: url('../../static/sprites/editor.png'); background-size: 24px 24px; }
-  .my-icon-blur { background: url('../../static/sprites/blur.png'); background-size: 24px 24px; }
-  .my-icon-fun { background: url('../../static/sprites/fun.png'); background-size: 24px 24px; }
-  .my-icon-filter { background: url('../../static/sprites/filter.png'); background-size: 24px 24px; }
-
-  .opensource,
-  .opensource .item,
-  .opensource a{
-    height: 100%;
-  }
-  .opensource {
-    line-height: 30px;
-  }
-
-  .opensource .title {
-    margin: 0;
-    padding-left: 3px;
-    font-size: 12px;
-    color: #ddd;
-  }
-
-  .opensource .item {
-    margin: 0 3px;
-  }
-
-  .opensource a {
-    position: relative;
-    display: inline-block;
-    padding: 0 5px;
-  }
-
-  .opensource .icon {
-    position: relative;
-    top: 6px;
-    width: 16px;
-    height: 16px;
-  }
-
-  .opensource .desc {
-    padding-left: 5px;
-    margin: 0;
-    font-size: 12px;
-    color: #fff;
-  }
-
-  .filter-preview, .filter-ct {
-    width: 100%;
-  }
-  .filter-ct {
-    margin-bottom: 15px;
-  }
-
-  .filter-preview {
-    display: block;
-  }
-
-  .filter {
-    position: relative;
-    right: -8px;
-    margin-top: 15px;
-    width: 90%;
-    border: 2px solid #fff;
-  }
-  .filter:hover {
-    box-shadow: 0 4px 8px 0 rgba(151, 168, 190, 0.6);
-  }
-  .filter-name {
-    display: block;
-    margin: 0;
-    padding: 5px 0;
-    font-size: 14px;
-    background: #fff;
-    color: #333;
-  }
 </style>

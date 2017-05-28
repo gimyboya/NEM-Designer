@@ -20,6 +20,7 @@ html, body{
 }
 body{
   font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 
