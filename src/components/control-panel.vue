@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" class="row-bg" :gutter="20">
+  <el-row type="flex" class="row-bg" justify="center">
     <el-col :span="20">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="70px" label-position="top" class="information">
         
@@ -9,7 +9,7 @@
           </el-form-item>
 
           <el-form-item label="Wallet password" prop="pass">
-            <el-input :type="inputype" v-model="ruleForm.pass" auto-complete="off"></el-input>
+            <el-input :type="inputype" :icon="icon" v-model="ruleForm.pass" auto-complete="off"></el-input>
           </el-form-item>
 
           <el-form-item>
@@ -54,6 +54,7 @@ export default {
     return {
       checked: false,
       inputype: 'password',
+      icon: 'search',
       settings: {
         type: [],
       },

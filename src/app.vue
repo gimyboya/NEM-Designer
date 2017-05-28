@@ -1,24 +1,14 @@
 <template>
-  <div class='container'>
-    
-  <paper class='canvas' ></paper>
-  <controlpanel class='panel' ></controlpanel>
 
-  </div>  
+    <router-view class="container"></router-view>
+
 </template>
 
 <script>
-import paper from './components/paper.vue'
-import controlpanel from './components/control-panel.vue'
 
 export default {
-  data () {
-    return {
-    }
-  },
-  components: {
-    paper,
-    controlpanel
+  beforeCreate: function(){
+    this.$router.replace('/');
   }
 }
 </script>
@@ -31,15 +21,14 @@ html, body{
 body{
   font-family: 'Roboto', sans-serif;
 }
-.container{
+
+
+.container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.canvas {
-  background-color: red;
-  height: 478px;
-}
 
 </style>
 

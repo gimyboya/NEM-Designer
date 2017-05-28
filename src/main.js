@@ -1,18 +1,36 @@
 // import 'vueify/lib/insert-css'
 import Vue from 'vue';
+import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
 import NEM from 'nem-sdk';
+import store from './js/store';
 import App from './app.vue';
+import Genwallet from './components/genwallet.vue';
+import editor from './components/editor.vue';
 
+Vue.use(VueRouter);
 Vue.use(ElementUI);
+
+
+const routes = [
+  { path: '/', component: Genwallet },
+  { path: '/edit', component: editor },
+];
+
+const router = new VueRouter({
+  routes, // short for routes: routes
+});
+
 const vm = new Vue({
+  router,
+  store,
   el: '#app',
   render: h => h(App),
 });
 
-console.log(NEM);
+// console.log(NEM);
 // Set a wallet name
-const swalletName = 'Sempletest';
+const swalletName = 'Simpletest';
 
 // Set a password/passphrase
 const spassword = 'Testnet@4749';
@@ -43,8 +61,8 @@ const BwalletAccount = Brainwallet.accounts[0];
 // console.log(BwalletAccount.algo);
 // console.log(!bcommon || !bcommon.password || !BwalletAccount || !BwalletAccount.algo);
 // Decrypt account private key
-const spk = NEM.crypto.helpers.passwordToPrivatekey(bcommon, BwalletAccount, Brainwallet.accounts[0].algo);
-const bpk = NEM.crypto.helpers.passwordToPrivatekey(scommon, SwalletAccount, Simplewallet.accounts[0].algo);
+NEM.crypto.helpers.passwordToPrivatekey(bcommon, BwalletAccount, Brainwallet.accounts[0].algo);
+NEM.crypto.helpers.passwordToPrivatekey(scommon, SwalletAccount, Simplewallet.accounts[0].algo);
 
 // The common object now has a private key
 console.log(scommon);
