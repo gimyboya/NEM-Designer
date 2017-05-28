@@ -3,7 +3,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
 import NEM from 'nem-sdk';
-import store from './js/store';
+import store from './store/store';
 import App from './app.vue';
 import Genwallet from './components/genwallet.vue';
 import editor from './components/editor.vue';
