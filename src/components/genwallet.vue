@@ -81,7 +81,7 @@ export default {
     submitForm(formName){
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.$router.replace('edit');
+          this.$router.replace('dashboard');
           this.$store.commit('setName', this.ruleForm.wname);
           this.$store.commit('setPassword', this.ruleForm.pass);
           this.$store.commit('setWtype', this.activeName);

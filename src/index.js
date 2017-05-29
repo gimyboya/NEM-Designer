@@ -8,13 +8,18 @@ let mainWindow;
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
-if (isDevMode) enableLiveReload();
+// if (isDevMode)
+enableLiveReload();
 
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1198,
-    height: 800,
+    fullscreen: true,
+    icon: './nemFavicon.ico',
+    webPreferences: {
+      experimentalFeatures: true,
+      experimentalCanvasFeatures: true,
+    },
   });
 
   // and load the index.html of the app.

@@ -5,7 +5,7 @@ import ElementUI from 'element-ui';
 import store from './store/store';
 import App from './app.vue';
 import Genwallet from './components/genwallet.vue';
-import editor from './components/editor.vue';
+import dashboard from './components/dashboard.vue';
 
 Vue.use(VueRouter);
 Vue.use(ElementUI);
@@ -13,7 +13,7 @@ Vue.use(ElementUI);
 
 const routes = [
   { path: '/', component: Genwallet },
-  { path: '/edit', component: editor },
+  { path: '/dashboard', component: dashboard },
 ];
 
 const router = new VueRouter({

@@ -1,16 +1,10 @@
 <template>
 
   <section id="vpic">
-    <div id="vmenu" class="fl">
-      <div class="logo">
-        <img src="./assets/img/logo.png" width="50px">
-      </div>
       <vsidebar></vsidebar>
-    </div>
-    <div id="vmain" class="">
       <vtoolbar></vtoolbar>
       <veditor></veditor>
-    </div>
+      <vupload></vupload>
   </section>
 
 
@@ -18,8 +12,9 @@
 <script>
 import Cropper from 'cropperjs';
 import Vtoolbar from './toolbar_module/index';
-import Vsidebar from './sidebar';
-import Veditor from './Veditor/index';
+import vupload from './vupload';
+import vsidebar from './vsidebar';
+import Veditor from './veditor';
 import nem from 'nem-sdk';
 
 export default {
@@ -63,7 +58,8 @@ export default {
   components: {
     Cropper,
     Vtoolbar,
-    Vsidebar,
+    vupload,
+    vsidebar,
     Veditor,
   },
 };
@@ -73,6 +69,6 @@ export default {
 #vpic{
   border: 4px solid red;
   display: grid;
-  grid: 120px 1fr / 30px 3fr 1fr;
+  grid-template: 120px 1fr / 30px 3fr 1fr;
 }
 </style>

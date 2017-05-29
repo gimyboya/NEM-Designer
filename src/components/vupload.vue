@@ -29,6 +29,7 @@
   // import Vdialog from './dialog';
 
   export default {
+    name: 'vupload',
     components: {
     // <vdialog :dialogTableVisible="dialogTableVisible"></vdialog>
 
