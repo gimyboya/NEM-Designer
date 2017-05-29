@@ -7,6 +7,7 @@ const store = new Vuex.Store({
   state: {
     name: '',
     password: '',
+    address: '',
     wtype: '',
     wallet: {},
     common: {},
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
     },
     setWallet(state, wallet) {
       state.wallet = wallet;
+    },
+    setAddress(state, address) {
+      state.address = address;
     },
     setCommon(state, common) {
       state.common = common;
@@ -122,6 +126,12 @@ const store = new Vuex.Store({
     },
     getWtype(state) {
       return state.wtype;
+    },
+    getCommon(state) {
+      return state.common;
+    },
+    getAddress(state) {
+      return state.address;
     },
   },
   actions: {

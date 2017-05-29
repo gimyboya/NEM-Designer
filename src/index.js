@@ -14,8 +14,10 @@ enableLiveReload();
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    fullscreen: true,
-    icon: './nemFavicon.ico',
+    width: 1278,
+    height: 790,
+    title: 'NEM Paper Wallet Generator',
+    icon: './logomark.ico',
     webPreferences: {
       experimentalFeatures: true,
       experimentalCanvasFeatures: true,

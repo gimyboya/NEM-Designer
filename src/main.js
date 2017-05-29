@@ -4,16 +4,16 @@ import VueRouter from 'vue-router';
 import ElementUI from 'element-ui';
 import store from './store/store';
 import App from './app.vue';
-import Genwallet from './components/genwallet.vue';
-import dashboard from './components/dashboard.vue';
+import Vgenwallet from './components/vgenwallet.vue';
+import Vdashboard from './components/vdashboard.vue';
 
 Vue.use(VueRouter);
 Vue.use(ElementUI);
 
 
 const routes = [
-  { path: '/', component: Genwallet },
-  { path: '/dashboard', component: dashboard },
+  { path: '/', component: Vgenwallet },
+  { path: '/dashboard', component: Vdashboard },
 ];
 
 const router = new VueRouter({
