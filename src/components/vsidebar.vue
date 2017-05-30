@@ -25,7 +25,11 @@
                 <div class="menue-checkboxes">
                   <el-checkbox class="indetermined" :indeterminate="isIndeterminateQR" style="margin: 15px 0;" v-model="checkAllQR" @change="handleCheckAllQRChange">Include all QR codes</el-checkbox>
                   <el-checkbox-group v-model="checkedQR" @change="handlecheckedQRChange">
-                    <el-checkbox v-for="qr in qrs" :label="qr" :key="qr">{{qr}}</el-checkbox>
+                    <el-tooltip placement="top">
+                      <div slot="content">This QR is only working on<br/>upcoming NEMpay mobile app</div>
+                      <el-checkbox v-for="qr in experimental" :label="qr" :key="qr" disabled>{{qr}}</el-checkbox>
+                    </el-tooltip>
+                    <el-checkbox v-for="qr in working" :label="qr" :key="qr">{{qr}}</el-checkbox>
                   </el-checkbox-group>
                 </div>
               </el-menu-item>
@@ -37,8 +41,7 @@
   <el-row type="flex" class="row-bg" justify="center">
     <el-col spane="24">  
       <div class="logo">
-        <img src="./assets/img/logo.png" width="30px">
-        <img src="./assets/img/power.png" width="50px">
+        <img src="./assets/img/logo.png" width="100px">
       </div>   
     </el-col>
   </el-row>
@@ -48,9 +51,10 @@
 <script>
 import Vicon from './vicon';
 import nem from 'nem-sdk';
+import QRious from 'qrious';
 
-const Texts = ['PrivateKey', 'Password', 'Wallet name', 'Address'];
-const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Password & privateKey'];
+const Texts = ['PrivateKey', 'Password', 'Wallet Name', 'Address'];
+const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Password & PrivateKey'];
 
   export default {
     data() {
@@ -59,7 +63,7 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
         checkedTexts: ['PrivateKey', 'Password'],
         texts: Texts,
         qrs: QRs,
-        checkedQR: ['Mobile Import', 'Voucher'],
+        checkedQR: ['Mobile Import', 'Voucher', 'NEMpay'],
         isIndeterminateText: true,
         isIndeterminateQR: true,
       };
@@ -82,6 +86,18 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
         let checkedCount = value.length;
         this.checkAll = checkedCount === this.qrs.length;
         this.isIndeterminateQR = checkedCount > 0 && checkedCount < this.qrs.length;
+      },
+    },
+    computed: {
+      experimental: function(){
+          return QRs.filter(function (item) {
+          return item === 'NEMpay';
+        });
+      },
+      working: function(){
+          return QRs.filter(function (item) {
+          return item !== 'NEMpay';
+        });
       },
     },
     components: {
@@ -117,7 +133,7 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
       };
 
       //QR structure for NEMpay
-      let QRNEMpay = {
+      let QRNEMpayObj = {
         'nem': {
           'type': 1,
           'version': 1,
@@ -129,6 +145,10 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
         }
       };
 
+      // turning the QR objects into strings and committing them
+      const QRMobileData = JSON.stringify(QRMobileObj);
+      const QRVoucherData = JSON.stringify(QRVoucherObj);
+      const QRNEMpayData = JSON.stringify(QRNEMpayObj);
 
     },
     

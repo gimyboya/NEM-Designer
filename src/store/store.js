@@ -17,6 +17,8 @@ const store = new Vuex.Store({
     },
     common: {},
     QRMobile: {},
+    QRVoucher: {},
+    QRNEMpay: {},
     uploaded: false,
     cropping: false,
     actionType: '',
@@ -60,6 +62,15 @@ const store = new Vuex.Store({
     },
     setCommon(state, common) {
       state.common = common;
+    },
+    setQRMobile(state, qr) {
+      state.QRMobile = qr;
+    },
+    setQRVoucher(state, qr) {
+      state.QRVoucher = qr;
+    },
+    setQRNEMpay(state, qr) {
+      state.QRNEMpay = qr;
     },
     storeResult(state, url) {
       state.storeUrl = url;
@@ -141,6 +152,15 @@ const store = new Vuex.Store({
     },
     getAddress(state) {
       return state.address;
+    },
+    getQRMobile(state) {
+      return state.QRMobile;
+    },
+    getQRVoucher(state) {
+      return state.QRVoucher;
+    },
+    getQRNEMpay(state) {
+      return state.QRNEMpay;
     },
   },
   actions: {
