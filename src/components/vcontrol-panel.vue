@@ -1,86 +1,59 @@
 <template>
-  <el-row type="flex" class="row-bg" justify="center">
-    <el-col :span="20">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="70px" label-position="top" class="information">
-        
-        <el-col :span="10">
-          <el-form-item label="Wallet name" prop="wname">
-            <el-input type="text" v-model="ruleForm.wname" auto-complete="off"></el-input>
-          </el-form-item>
 
-          <el-form-item label="Wallet password" prop="pass">
-            <el-input :type="inputype" :icon="icon" v-model="ruleForm.pass" auto-complete="off"></el-input>
-          </el-form-item>
+  <section class="control-container"> 
+      <div class="text-qr"></div> 
+      <div class="upload"></div> 
+  <el-checkbox :indeterminate="isIndeterminateText" v-model="checkAllTexts" @change="handleCheckAllTextsChange">Include all texts</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedTexts" @change="handlecheckedTextsChange">
+    <el-checkbox v-for="text in texts" :label="text" :key="text">{{text}}</el-checkbox>
+  </el-checkbox-group>
+  
+  <el-checkbox :indeterminate="isIndeterminateQR" v-model="checkAllQR" @change="handleCheckAllQRChange">Include all QR codes</el-checkbox>
+  <div style="margin: 15px 0;"></div>
+  <el-checkbox-group v-model="checkedQR" @change="handlecheckedQRChange">
+    <el-checkbox v-for="qr in qrs" :label="qr" :key="qr">{{qr}}</el-checkbox>
+  </el-checkbox-group>
 
-          <el-form-item>
-            <el-checkbox v-model="checked" @change="showpass" >Show password</el-checkbox>
-          </el-form-item>
-        </el-col>
-        <el-col :span="10">
-          </el-form-item>
-          <el-form-item label="Settings">
-            <el-checkbox-group v-model="settings.type">
-              <el-tooltip placement="top">
-                <p slot="content">Recommended</p>
-                <el-checkbox label="Include my password" name="type"></el-checkbox>
-              </el-tooltip>
-              
-              <el-tooltip placement="top">
-                <p slot="content">Recommended: Display your private key in palin text.</p>
-                <el-checkbox label="Include RAW private key" name="type"></el-checkbox>          
-              </el-tooltip>
+  </section>
 
-                
-              <el-tooltip placement="top">
-                <p slot="content">Allow the use of the mobile app to import your wallet.</p>
-                <el-checkbox label="QR for mobile wallet import" name="type"></el-checkbox>             
-              </el-tooltip>
-
-            </el-checkbox-group>
-          </el-form-item>
-        </el-col>
-
-
-      </el-form>
-    </el-col>
-
-
-
-  </el-row>
 </template>
+
+
 <script>
+const Texts = ['PrivateKey', 'Password', 'Wallet name', 'Address'];
+const QRs = ['Mobile Import', 'PrivateKey', 'Password', 'Address', 'Password & privateKey'];
 export default {
   data() {
     return {
-      checked: false,
-      inputype: 'password',
-      icon: 'search',
-      settings: {
-        type: [],
-      },
-      ruleForm: {
-        pass: '',
-        wname: '',
-      },
-      rules: {
-        pass: [
-          { required: true, message: 'Please input your wallet password', trigger: 'blur' },
-          { min: 6, message: 'The password should be at least 6 charachters', trigger: 'blur' },
-        ],
-        wname: [
-          { required: true, message: 'Please input your wallet name', trigger: 'blur' }
-        ],
-      },
+      checkAll: true,
+      checkedTexts: ['PrivateKey', 'Password'],
+      texts: Texts,
+      qrs: QRs,
+      checkedQR: ['Mobile Import', 'PrivateKey'],
+      isIndeterminateText: true,
+      isIndeterminateQR: true
     };
   },
   methods: {
-    showpass: function(){
-      if(this.checked){
-        this.inputype = 'text';
-      }else{
-        this.inputype = 'password';
-      }
-    }
+    handleCheckAllTextsChange(event) {
+      this.checkedTexts = event.target.checked ? Texts : [];
+      this.isIndeterminateText = false;
+    },
+    handleCheckAllQRChange(event) {
+      this.checkedQR = event.target.checked ? QRs : [];
+      this.isIndeterminateQR = false;
+    },
+    handlecheckedTextsChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.texts.length;
+      this.isIndeterminateText = checkedCount > 0 && checkedCount < this.texts.length;
+    },
+    handlecheckedQRChange(value) {
+      let checkedCount = value.length;
+      this.checkAll = checkedCount === this.qrs.length;
+      this.isIndeterminateQR = checkedCount > 0 && checkedCount < this.qrs.length;
+    },
   },
 
 }

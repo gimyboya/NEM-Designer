@@ -4,7 +4,7 @@
       <vsidebar class="vsidebar"></vsidebar>
       <vtoolbar class="vtoolbar"></vtoolbar>
       <veditor class="veditor"></veditor>
-      <vcontrol class="vcontrol"></vcontrol>
+      <vupload class="vupload"></vupload>
   </section>
 
 
@@ -12,7 +12,7 @@
 <script>
 import Cropper from 'cropperjs';
 import Vtoolbar from './toolbar_module/index';
-import Vcontrol from './vcontrol-panel';
+import Vcontrol from './vuplaod';
 import Vsidebar from './vsidebar';
 import Veditor from './veditor';
 
@@ -54,7 +54,7 @@ export default {
   grid-area: canvas;
   background-color: goldenrod;
 }
-.vcontrol{
+.vupload{
   grid-area: upload;
   background-color: cornflowerblue;
 }

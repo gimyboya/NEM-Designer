@@ -1,190 +1,54 @@
 <template>
-<div>
+<section>
   <el-row class="tac custom-scrollbar" id="vpic_sidebar">
     <el-col :span="24">
-      <el-menu unique-opened class="el-menu-vertical-demo">
+      <div class="logo">
+        <img src="./assets/img/logo.png" width="50px">
+      </div>
+      <el-menu unique-opened default-active="1-2" class="el-menu-vertical-demo">
         <el-submenu index="1">
-          <template slot="title"><i class="my-icon-cut my-icon"></i>裁切</template>
-          <el-submenu index="1-1">
-            <template slot="title">固定比例</template>
-            <el-menu-item-group>
-              <el-menu-item v-for="cropItem in cropList" :index="cropItem.order" :data-aspectratio="cropItem.val" @click="setAspectRatio">{{ cropItem.name }}</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-menu-item index="1-2" data-aspectratio="NaN" @click="setAspectRatio">自由裁切</el-menu-item>
-        </el-submenu>
-        <el-submenu index="2">
-          <template slot="title"><i class="my-icon-edit my-icon"></i>调整</template>
-          <el-submenu index="2-1">
-            <template slot="title">亮度 / 对比度</template>
-            <el-menu-item-group>
-              <el-menu-item index="2-1-1">
-                <div class="val-tag clearfix">
-                  <span class="fl">亮度</span>
-                  <span class="fr">{{ brightness }}</span>
-                </div>
-                <el-slider v-model="brightness" :min="-50" :max="50" :show-tooltip="false" @change="setBrightness"></el-slider>
-              </el-menu-item>
-              <el-menu-item index="2-1-2">
-                <div class="val-tag clearfix">
-                  <span class="fl">对比度</span>
-                  <span class="fr">{{ contrast }}</span>
-                </div>
-                <el-slider v-model="contrast" :min="-50" :max="50" :show-tooltip="false" @change="setContrast"></el-slider>
-              </el-menu-item>
-              <el-menu-item index="2-1-3">
-                <el-button type="primary" @click="saveResult">确定</el-button>
-                <el-button @click="resetGrayscale">重置</el-button>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="2-2">
-            <template slot="title">色调 / 饱和度</template>
-            <el-menu-item-group>
-              <el-menu-item index="2-2-1">
-                <div class="val-tag clearfix">
-                  <span class="fl">色调</span>
-                  <span class="fr">{{ hue }}</span>
-                </div>
-                <el-slider v-model="hue" :min="0" :max="100" :show-tooltip="false" @change="setHue"></el-slider>
-              </el-menu-item>
-              <el-menu-item index="2-2-2">
-                <div class="val-tag clearfix">
-                  <span class="fl">饱和度</span>
-                  <span class="fr">{{ saturation }}</span>
-                </div>
-                <el-slider v-model="saturation" :min="-50" :max="50" :show-tooltip="false" @change="setSaturation"></el-slider>
-              </el-menu-item>
-              <el-menu-item index="2-2-3">
-                <el-button type="primary" @click="saveResult">确定</el-button>
-                <el-button @click="resetColor">重置</el-button>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="2-3">
-            <template slot="title">灰度 / 反色</template>
-            <el-menu-item-group>
-              <el-menu-item index="2-3-1">
-                <div class="val-tag clearfix">
-                  <span class="fl">灰度</span>
-                  <span class="fr">{{ greyscale }}</span>
-                </div>
-                <el-switch v-model="greyscale" on-text="" off-text="" @change="setGreyscale" on-color="#7D5CFF"></el-switch>
-              </el-menu-item>
-              <el-menu-item index="2-3-2">
-                <div class="val-tag clearfix">
-                  <span class="fl">反色</span>
-                  <span class="fr">{{ invert }}</span>
-                </div>
-                <el-switch v-model="invert" on-text="" off-text="" @change="setInvert" on-color="#7D5CFF"></el-switch>
-              </el-menu-item>
-              <el-menu-item index="2-3-3">
-                <el-button type="primary" @click="saveResult">确定</el-button>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-submenu>
-        <el-submenu index="3">
-          <template slot="title"><i class="my-icon-blur my-icon"></i>增强</template>
-          <el-submenu index="3-1">
-            <template slot="title">模糊</template>
-            <el-menu-item index="3-1-1">
-              <div class="val-tag clearfix">
-                <span class="fl">模糊</span>
-                <span class="fr">{{ blur }}</span>
-              </div>
-              <el-slider v-model="blur" :min="0" :max="20" :show-tooltip="false" @change="setBlur"></el-slider>
-            </el-menu-item>
-            <el-menu-item index="3-1-2">
-              <el-button type="primary" @click="saveResult">确定</el-button>
-              <el-button @click="resetBlur">重置</el-button>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="3-2">
-            <template slot="title">噪声</template>
-            <el-menu-item index="3-2-1">
-              <div class="val-tag clearfix">
-                <span class="fl">噪声</span>
-                <span class="fr">{{ noise }}</span>
-              </div>
-              <el-slider v-model="noise" :min="0" :max="50" :show-tooltip="false" @change="setNoise"></el-slider>
-            </el-menu-item>
-            <el-menu-item index="3-2-2">
-              <el-button type="primary" @click="saveResult">确定</el-button>
-              <el-button @click="resetNoise">重置</el-button>
-            </el-menu-item>
-          </el-submenu>
-          <el-submenu index="3-3">
-            <template slot="title">锐化</template>
-            <el-menu-item index="3-3-1">
-              <div class="val-tag clearfix">
-                <span class="fl">锐化</span>
-                <span class="fr">{{ sharpen }}</span>
-              </div>
-              <el-slider v-model="sharpen" :min="0" :max="50" :show-tooltip="false" @change="setSharpen"></el-slider>
-            </el-menu-item>
-            <el-menu-item index="3-3-2">
-              <el-button type="primary" @click="saveResult">确定</el-button>
-              <el-button @click="resetSharpen">重置</el-button>
-            </el-menu-item>
-          </el-submenu>
-        </el-submenu>
-        <el-submenu index="4">
-          <template slot="title"><i class="my-icon-filter my-icon"></i>滤镜</template>
-              <el-row :gutter="5" class="filter-ct">
-                <el-col :span="12" v-for="item in filterList">
-                  <div class="filter" :data-filter="item.name" @click="setFilter">
-                    <img class="filter-preview" :src="item.preview">
-                    <p class="filter-name">{{ item.desc }}</p>
-                  </div>
-                </el-col>
-              </el-row>
-        </el-submenu>
+          <template slot="title"><vicon name="object-ungroup"></vicon>Elements</template>
+          <el-menu-item index="1-1">
+            <div class="menue-checkboxes">
+              <el-checkbox :indeterminate="isIndeterminateText" v-model="checkAllTexts" @change="handleCheckAllTextsChange">Include all texts</el-checkbox>
+              <div style="margin: 15px 0;"></div>
+              <el-checkbox-group v-model="checkedTexts" @change="handlecheckedTextsChange">
+                <el-checkbox v-for="text in texts" :label="text" :key="text">{{text}}</el-checkbox>
+              </el-checkbox-group>          
+            </div>
+          </el-menu-item>
+          <el-menu-item index="1-2" >
+            <div class="menue-checkboxes">
+              <el-checkbox :indeterminate="isIndeterminateQR" v-model="checkAllQR" @change="handleCheckAllQRChange">Include all QR codes</el-checkbox>
+              <div style="margin: 15px 0;"></div>
+              <el-checkbox-group v-model="checkedQR" @change="handlecheckedQRChange">
+                <el-checkbox v-for="qr in qrs" :label="qr" :key="qr">{{qr}}</el-checkbox>
+              </el-checkbox-group>
+            </div>
+          </el-menu-item>
       </el-menu>
     </el-col>
   </el-row>
-  <div class="project-info">
-    <ul class="opensource">
-      <li class="item fl"><p class="title">Power by:</p></li>
-      <li class="item fl" v-for="item in opensource">
-        <a :href="item.link" target="_blank" class="clearfix">
-          <span class="icon fl" :style="item.logo"></span>
-          <p class="desc fl">{{ item.name }}</p>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+</section>
 </template>
 
 <script>
-  import $ from 'jquery';
+import Vicon from './vicon';
+import $ from 'jquery';
+
+const Texts = ['PrivateKey', 'Password', 'Wallet name', 'Address'];
+const QRs = ['Mobile Import', 'PrivateKey', 'Password', 'Address', 'Password & privateKey'];
 
   export default {
     data() {
       return {
-        cropList: [
-          {
-            order: '1-1-1',
-            val: '16/9',
-            name: '宽屏16:9',
-          },
-          {
-            order: '1-1-2',
-            val: '4/3',
-            name: '标准4:3',
-          },
-          {
-            order: '1-1-3',
-            val: '1/1',
-            name: '正方形',
-          },
-          {
-            order: '1-1-4',
-            val: '2/3',
-            name: '2:3',
-          },
-        ],
+        heckAll: true,
+        checkedTexts: ['PrivateKey', 'Password'],
+        texts: Texts,
+        qrs: QRs,
+        checkedQR: ['Mobile Import', 'PrivateKey'],
+        isIndeterminateText: true,
+        isIndeterminateQR: true,
         brightness: 0,
         contrast: 0,
         hue: 0,
@@ -267,86 +131,29 @@
       };
     },
     methods: {
-      setAspectRatio(e) {
-        const ratioMap = {
-          '16/9': 16 / 9,
-          '4/3': 4 / 3,
-          '1/1': 1 / 1,
-          '2/3': 2 / 3,
-          NaN,
-        };
-
-        if (this.$store.state.uploaded) {
-          this.$store.state.cropper.setAspectRatio(ratioMap[e.$el.dataset.aspectratio]);
-        } else {
-          this.$message({
-            message: '请先导入图片哦',
-            type: 'warning',
-          });
-        }
+      handleCheckAllTextsChange(event) {
+        this.checkedTexts = event.target.checked ? Texts : [];
+        this.isIndeterminateText = false;
       },
-      setBrightness() {
-        this.$store.dispatch('setBrightness', this.brightness);
+      handleCheckAllQRChange(event) {
+        this.checkedQR = event.target.checked ? QRs : [];
+        this.isIndeterminateQR = false;
       },
-      setContrast() {
-        this.$store.dispatch('setContrast', this.contrast);
+      handlecheckedTextsChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.texts.length;
+        this.isIndeterminateText = checkedCount > 0 && checkedCount < this.texts.length;
       },
-      setHue() {
-        this.$store.dispatch('setHue', this.hue);
+      handlecheckedQRChange(value) {
+        let checkedCount = value.length;
+        this.checkAll = checkedCount === this.qrs.length;
+        this.isIndeterminateQR = checkedCount > 0 && checkedCount < this.qrs.length;
       },
-      setSaturation() {
-        this.$store.dispatch('setSaturation', this.saturation);
-      },
-      setGreyscale() {
-        this.$store.dispatch('setGreyscale', this.greyscale);
-      },
-      setInvert() {
-        this.$store.dispatch('setInvert', this.invert);
-      },
-      setBlur() {
-        this.$store.dispatch('setBlur', this.blur);
-      },
-      setNoise() {
-        this.$store.dispatch('setNoise', this.noise);
-      },
-      setSharpen() {
-        this.$store.dispatch('setSharpen', this.sharpen);
-      },
-      setFilter(e) {
-        const $target = $(e.currentTarget);
-        const filterType = $target.data('filter');
-
-        this.$store.dispatch('setFilter', filterType);
-      },
-      saveResult() {
-        const imgUrl = this.$store.state.storeUrl;
-
-        this.$store.dispatch('setImgUrl', imgUrl);
-        this.$notify({
-          title: '提示',
-          message: '参数调整完成 可点击下载',
-          type: 'success',
-          duration: 1500,
-        });
-      },
-      resetGrayscale() {
-        this.brightness = 0;
-        this.contrast = 0;
-      },
-      resetColor() {
-        this.hue = 0;
-        this.saturation = 0;
-      },
-      resetBlur() {
-        this.blur = 0;
-      },
-      resetNoise() {
-        this.noise = 0;
-      },
-      resetSharpen() {
-        this.sharpen = 0;
-      },
+      
     },
+    components: {
+      Vicon,
+    }
   };
 </script>
 

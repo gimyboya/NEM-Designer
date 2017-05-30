@@ -153,7 +153,7 @@ export default {
         label: 'Test network (dev)',
           options: [{
             value: -104,
-            label: 'Test'
+            label: 'Testnet'
           },]
       }
       ],
