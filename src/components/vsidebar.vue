@@ -51,7 +51,7 @@
 <script>
 import Vicon from './vicon';
 import nem from 'nem-sdk';
-import QRious from 'qrious';
+// import QRious from 'qrious';
 
 const Texts = ['PrivateKey', 'Password', 'Wallet Name', 'Address'];
 const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Password & PrivateKey'];
