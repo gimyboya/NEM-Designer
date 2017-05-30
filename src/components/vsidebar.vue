@@ -50,7 +50,7 @@ import Vicon from './vicon';
 import nem from 'nem-sdk';
 
 const Texts = ['PrivateKey', 'Password', 'Wallet name', 'Address'];
-const QRs = ['Mobile Import', 'PrivateKey', 'Password', 'Address', 'Password & privateKey'];
+const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Password & privateKey'];
 
   export default {
     data() {
@@ -59,7 +59,7 @@ const QRs = ['Mobile Import', 'PrivateKey', 'Password', 'Address', 'Password & p
         checkedTexts: ['PrivateKey', 'Password'],
         texts: Texts,
         qrs: QRs,
-        checkedQR: ['Mobile Import', 'PrivateKey'],
+        checkedQR: ['Mobile Import', 'Voucher'],
         isIndeterminateText: true,
         isIndeterminateQR: true,
       };
@@ -86,7 +86,53 @@ const QRs = ['Mobile Import', 'PrivateKey', 'Password', 'Address', 'Password & p
     },
     components: {
       Vicon,
-    }
+    },
+    mounted: function () {
+      // generat QR code for mobile import
+      // encrypt the private key for mobile usage
+      const _this = this;
+      let mobileKeys = nem.crypto.helpers.toMobileKey(
+                          _this.$store.getters.getPassword, 
+                          _this.$store.getters.getPrivateKey);
+
+      // QR structure for mobile import
+      let QRMobileObj = {
+        "v": this.$store.getters.getNetwork === nem.model.network.data.testnet.id ? 1 : 2,
+        "type": 3,
+        "data": {
+          "name": this.$store.getters.getName,
+          "priv_key": mobileKeys.encrypted,
+          "salt": mobileKeys.salt
+        },
+      };
+
+      // QR structure for voucher
+      let QRVoucherObj = {
+        "v": this.$store.getters.getNetwork === nem.model.network.data.testnet.id ? 1 : 2,
+        "type": 1,
+        "data": {
+          "addr": this.$store.getters.getAddress,
+          "name": this.$store.getters.getName,
+        },
+      };
+
+      //QR structure for NEMpay
+      let QRNEMpay = {
+        'nem': {
+          'type': 1,
+          'version': 1,
+          'name': this.$store.getters.getName,
+          'enc_priv': this.$store.getters.getWallet.accounts[0].encrypted,
+          'iv': this.$store.getters.getWallet.accounts[0].encrypted.iv,
+          'indexes': Object.keys(this.$store.getters.getWallet.accounts).length,
+          'accountLabels': []
+        }
+      };
+
+
+    },
+    
+    
   };
 </script>
 

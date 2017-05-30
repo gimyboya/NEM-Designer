@@ -8,9 +8,15 @@ const store = new Vuex.Store({
     name: '',
     password: '',
     address: '',
-    wtype: '',
-    wallet: {},
+    wallet: {
+      accounts: [
+        {
+          'network': null,
+        },
+      ],
+    },
     common: {},
+    QRMobile: {},
     uploaded: false,
     cropping: false,
     actionType: '',
@@ -118,17 +124,20 @@ const store = new Vuex.Store({
     },
   },
   getters: {
+    getWallet(state) {
+      return state.wallet;
+    },
     getName(state) {
       return state.name;
     },
     getPassword(state) {
       return state.password;
     },
-    getWtype(state) {
-      return state.wtype;
+    getNetwork(state) {
+      return state.wallet.accounts[0].network;
     },
-    getCommon(state) {
-      return state.common;
+    getPrivateKey(state) {
+      return state.common.privateKey;
     },
     getAddress(state) {
       return state.address;

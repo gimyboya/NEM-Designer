@@ -11,11 +11,11 @@
                 <el-form :model="ruleFormPrng" :rules="rulesPrng" ref="ruleFormPrng" label-width="70px" label-position="top" class="information">
             
                   <el-form-item label="Wallet name" prop="wname">
-                    <el-input type="text" v-model="ruleFormPrng.wname" auto-complete="off"></el-input>
+                    <el-input type="text" @keyup.enter="submitForm('ruleFormPrng')" v-model="ruleFormPrng.wname" auto-complete="off"></el-input>
                   </el-form-item>
             
                   <el-form-item label="Wallet password" prop="pass">
-                    <el-input :type="inputypePrng" v-model="ruleFormPrng.pass" auto-complete="off">
+                    <el-input :type="inputypePrng"  @keyup.enter="submitForm('ruleFormPrng')" v-model="ruleFormPrng.pass" auto-complete="off">
                       <el-button slot="append" @click="showpassPrng">
                         <vicon :name="iconPrng" :color="icolorPrng"></vicon>
                       </el-button>
@@ -24,7 +24,7 @@
             
             
                   <el-form-item label="Wallet private key" prop="pk">
-                    <el-input :type="inputypePrng2" v-model="ruleFormPrng.pk" auto-complete="off">
+                    <el-input :type="inputypePrng2"  @keyup.enter="submitForm('ruleFormPrng')" v-model="ruleFormPrng.pk" auto-complete="off">
                       <el-button slot="append" @click="showpassPrng2">
                         <vicon :name="iconPrng2" :color="icolorPrng2"></vicon>
                       </el-button>
@@ -52,18 +52,18 @@
 
         </el-tab-pane>
 
-        <el-tab-pane label="Brain Wallet / Voucher" name="brain">
+        <el-tab-pane label="Brain Wallet" name="brain">
           
           <el-row type="flex" class="row-bg" justify="center">
             <el-col :span="16">
               <el-form :model="ruleFormBrain" :rules="rulesBrain" ref="ruleFormBrain" label-width="70px" label-position="top" class="information">
           
                 <el-form-item label="Wallet name" prop="wname">
-                  <el-input type="text" v-model="ruleFormBrain.wname" auto-complete="off"></el-input>
+                  <el-input type="text"  @keyup.enter="submitForm('ruleFormBrain')" v-model="ruleFormBrain.wname" auto-complete="off"></el-input>
                 </el-form-item>
           
                 <el-form-item label="Wallet password" prop="pass">
-                  <el-input :type="inputypeBrain" v-model="ruleFormBrain.pass" auto-complete="off">
+                  <el-input :type="inputypeBrain"  @keyup.enter="submitForm('ruleFormBrain')" v-model="ruleFormBrain.pass" auto-complete="off">
                     <el-button slot="append" @click="showpassBrain">
                       <vicon :name="iconBrain" :color="icolorBrain"></vicon>
                     </el-button>
@@ -229,8 +229,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) { 
           this.loading = true;
-          // if it's valid we create a wallet and commit evry information to the store
-          this.$store.commit('setWtype', this.activeName);
+          
           if(this.activeName === 'prng'){
 
             // we commit name and pass to the store
