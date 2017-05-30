@@ -12,7 +12,7 @@
 <script>
 import Cropper from 'cropperjs';
 import Vtoolbar from './toolbar_module/index';
-import Vcontrol from './vuplaod';
+import Vupload from './vupload';
 import Vsidebar from './vsidebar';
 import Veditor from './veditor';
 
@@ -22,7 +22,7 @@ export default {
   components: {
     Cropper,
     Vtoolbar,
-    Vcontrol,
+    Vupload,
     Vsidebar,
     Veditor,
   },
@@ -32,7 +32,7 @@ export default {
 <style>
 #vpic{
   display: grid;
-  grid-template: 50px 3fr 1fr / 0.75fr 3fr ;
+  grid-template: 50px 3fr 1fr / 1fr 3fr ;
   grid-template-areas: 
     "sidebar toolbar"
     "sidebar canvas"
@@ -44,7 +44,8 @@ export default {
 
 .vsidebar{
   grid-area: sidebar;
-  background-color: lightcoral;
+  background-color: #EFF2F7;
+
 }
 .vtoolbar{
   grid-area: toolbar;
