@@ -1,5 +1,6 @@
 <template>
 <section>
+
   <el-row class="tac custom-scrollbar" id="vpic_sidebar">
     <el-col :span="24">
 
@@ -38,20 +39,13 @@
       </el-menu>  
     </el-col>
   </el-row>
-  <el-row type="flex" class="row-bg" justify="center">
-    <el-col spane="24">  
-      <div class="logo">
-        <img src="./assets/img/logo.png" width="100px">
-      </div>   
-    </el-col>
-  </el-row>
+
 </section>
 </template>
 
 <script>
 import Vicon from './vicon';
 import nem from 'nem-sdk';
-// import QRious from 'qrious';
 
 const Texts = ['PrivateKey', 'Password', 'Wallet Name', 'Address'];
 const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Password & PrivateKey'];
@@ -149,6 +143,7 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
       const QRMobileData = JSON.stringify(QRMobileObj);
       const QRVoucherData = JSON.stringify(QRVoucherObj);
       const QRNEMpayData = JSON.stringify(QRNEMpayObj);
+      console.log(QRMobileData);
 
     },
     
@@ -181,20 +176,5 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
 .undetermined{
   font-size: 14px;
 }
-
-.logo{
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  height: 200Px;
-  bottom: 20px;
-  left: 100px;
-  align-items: center;
-}
-
-.logo img {
-  margin: auto;
-}
-
 
 </style>

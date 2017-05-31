@@ -16,7 +16,7 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     width: 1278,
     height: 790,
-    title: 'NEM Paper Wallet Generator',
+    title: 'NEM-Designer',
     icon: './logomark.ico',
     webPreferences: {
       experimentalFeatures: true,
@@ -33,6 +33,10 @@ const createWindow = async () => {
     mainWindow.webContents.openDevTools();
   }
 
+  mainWindow.webContents.on('new-window', function (e, url) {
+    e.preventDefault();
+    require('electron').shell.openExternal(url);
+  });  
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     // Dereference the window object, usually you would store windows

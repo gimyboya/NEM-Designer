@@ -20,7 +20,7 @@
     </el-dialog>
     <div class="import-area J-import" @click="dialogTableVisible = true">
       <span class="icon"></span>
-      <p class="tip">Dragged into the picture or <span class="browse">Click Import</span></p>
+      <!-- <p class="tip">Dragged into the picture or <span class="browse">Click Import</span></p> -->
     </div>
   </div>
 </template>

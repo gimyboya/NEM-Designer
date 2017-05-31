@@ -21,6 +21,8 @@ html, body{
 }
 body{
   font-family: 'Roboto', sans-serif;
+  background-color: #EFF2F7;
+
 }
 
 
