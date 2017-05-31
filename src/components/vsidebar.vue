@@ -26,10 +26,15 @@
                 <div class="menue-checkboxes">
                   <el-checkbox class="indetermined" :indeterminate="isIndeterminateQR" style="margin: 15px 0;" v-model="checkAllQR" @change="handleCheckAllQRChange">Include all QR codes</el-checkbox>
                   <el-checkbox-group v-model="checkedQR" @change="handlecheckedQRChange">
-                    <el-tooltip placement="top">
-                      <div slot="content">This QR is only working on<br/>upcoming NEMpay mobile app</div>
-                      <el-checkbox v-for="qr in experimental" :label="qr" :key="qr" disabled>{{qr}}</el-checkbox>
-                    </el-tooltip>
+                    <el-popover
+                        ref="experimental"
+                        placement="top"
+                        title="info"
+                        width="200"
+                        trigger="click"
+                        content="This QR is only working on<br/>upcoming NEMpay mobile app">
+                      </el-popover>
+                    <el-checkbox label="NEMpay"  v-popover:experimental>NEMpay</el-checkbox>
                     <el-checkbox v-for="qr in working" :label="qr" :key="qr">{{qr}}</el-checkbox>
                   </el-checkbox-group>
                 </div>
@@ -57,7 +62,7 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
         checkedTexts: ['PrivateKey', 'Password'],
         texts: Texts,
         qrs: QRs,
-        checkedQR: ['Mobile Import', 'Voucher', 'NEMpay'],
+        checkedQR: ['Mobile Import', 'Voucher'],
         isIndeterminateText: true,
         isIndeterminateQR: true,
       };
@@ -83,13 +88,8 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
       },
     },
     computed: {
-      experimental: function(){
-          return QRs.filter(function (item) {
-          return item === 'NEMpay';
-        });
-      },
-      working: function(){
-          return QRs.filter(function (item) {
+      working: function () {
+        return QRs.filter(function (item) {
           return item !== 'NEMpay';
         });
       },
@@ -144,6 +144,15 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
       const QRVoucherData = JSON.stringify(QRVoucherObj);
       const QRNEMpayData = JSON.stringify(QRNEMpayObj);
       console.log(QRMobileData);
+      const qrm = new QRious({ value: QRMobileData });
+      const qrv = new QRious({ value: QRVoucherData });
+      const qrn = new QRious({ value: QRNEMpayData });
+      const qrpk = new QRious({ value: _this.$store.getters.getPrivateKey });
+      const qrpass = new QRious({ value: _this.$store.getters.getPassword });
+      const qrpassnpk = new QRious({ value: `Password: {_this.$store.getters.getPassword}
+                                      PrivateKey: {_this.$store.getters.getPrivateKey}`});
+      console.log(qrpk);
+      console.log(QRious);
 
     },
     
