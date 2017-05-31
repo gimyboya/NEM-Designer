@@ -88,6 +88,7 @@ export default {
 .veditor{
   grid-area: canvas;
   background-color: #475669;
+  display: flex;
 }
 .vupload{
   grid-area: upload;

@@ -8,7 +8,7 @@
 
 export default {
   beforeCreate: function(){
-    this.$router.replace('/');
+    // this.$router.replace('/');
   }
 }
 </script>

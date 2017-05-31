@@ -30,9 +30,9 @@
                         ref="experimental"
                         placement="top"
                         title="info"
-                        width="200"
-                        trigger="click"
-                        content="This QR is only working on<br/>upcoming NEMpay mobile app">
+                        width="100"
+                        trigger="hover"
+                        content="This QR is only working on upcoming NEMpay mobile app">
                       </el-popover>
                     <el-checkbox label="NEMpay"  v-popover:experimental>NEMpay</el-checkbox>
                     <el-checkbox v-for="qr in working" :label="qr" :key="qr">{{qr}}</el-checkbox>
