@@ -59,12 +59,12 @@ const QRs = ['Mobile Import', 'Voucher', 'NEMpay', 'PrivateKey', 'Password', 'Pa
     data() {
       return {
         heckAll: true,
-        checkedTexts: ['PrivateKey', 'Password'],
+        checkedTexts: [],
         texts: Texts,
         qrs: QRs,
-        checkedQR: ['Mobile Import', 'Voucher'],
-        isIndeterminateText: true,
-        isIndeterminateQR: true,
+        checkedQR: [],
+        isIndeterminateText: false,
+        isIndeterminateQR: false,
       };
     },
     methods: {

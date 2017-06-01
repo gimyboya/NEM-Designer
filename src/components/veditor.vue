@@ -54,18 +54,31 @@ export default {
   },
   methods: {
     onResize(event){
+      let scalX = (this.canvas.getWidth() / this.canvas.getHeight());
+      let scalY = (this.canvas.getHeight() / this.canvas.getWidth());
+      console.log(scalX);
       this.canvas.setWidth($('#editor-container').width());
       this.canvas.setHeight($('#editor-container').height());
-      console.log(this.canvas.getWidth());
-      console.log(this.canvas.getHeight());
-      this.canvas.viewportCenterObject(this.canvas.getObject(rect));
+      // this.canvas.viewportCenterObject(this.canvas.getObject(rect));
+      this.canvas.renderAll();
+      
+      let objects = this.canvas.getObjects();
+      for (var i in objects) {
+        console.log(objects[i].scaleX);
+        console.log(objects[i].scaleY);
+        objects[i].scaleX = objects[i].scaleX * 1;
+        objects[i].scaleY = objects[i].scaleY * 1;
+        objects[i].left = 100;
+        objects[i].top = 200;
+        objects[i].setCoords();
+      }
+      this.canvas.renderAll();
     }
   },
   mounted: function () {
   
 
     const _this = this; // we save the scope
-    // we get the size of the canvas container to adjust it to it
 
     this.canvas = new fabric.Canvas('editor');
     this.canvas.setDimensions({
@@ -79,6 +92,10 @@ export default {
       width: 10,
       height: 10,
     }, _this.canvas.renderAll.bind(_this.canvas));
+
+    fabric.Image.fromURL('../static/image/Jabo_Paper_Wallet_1200-480.jpg', function (oImg) {
+      _this.canvas.add(oImg);
+    });
 
     // create a rectangle object
     let rect = new fabric.Rect({
