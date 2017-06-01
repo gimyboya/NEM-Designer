@@ -14,6 +14,7 @@ enableLiveReload();
 const createWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    show: true,
     width: 1278,
     height: 790,
     title: 'NEM-Designer',

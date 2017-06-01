@@ -19,6 +19,7 @@ const store = new Vuex.Store({
     QRMobile: {},
     QRVoucher: {},
     QRNEMpay: {},
+    canvas: {},
     uploaded: false,
     cropping: false,
     actionType: '',
@@ -71,6 +72,9 @@ const store = new Vuex.Store({
     },
     setQRNEMpay(state, qr) {
       state.QRNEMpay = qr;
+    },
+    setCanvas(state, canvas) {
+      state.canvas = canvas;
     },
     storeResult(state, url) {
       state.storeUrl = url;
@@ -162,8 +166,20 @@ const store = new Vuex.Store({
     getQRNEMpay(state) {
       return state.QRNEMpay;
     },
+    getCanvas(state) {
+      return state.canvas;
+    }
   },
   actions: {
+    setQRMobile({ commit }, qr) {
+      commit('setQRMobile', qr);
+    },
+    setQRVoucher({ commit }, qr) {
+      commit('setQRVoucher', qr);
+    },
+    setQRNEMpay({ commit }, qr) {
+      commit('setQRNEMpay', qr);
+    },
     storeResult({ commit }, url) {
       commit('storeResult', url);
     },

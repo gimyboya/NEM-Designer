@@ -20,7 +20,8 @@ html, body{
   height: 100%
 }
 body{
-  font-family: 'Roboto', sans-serif;
+  /*font-family: 'Roboto', sans-serif;*/
+  font: caption;
   background-color: #EFF2F7;
 
 }

@@ -1,26 +1,20 @@
 <template>
     
-<section class="editor-container">
+<section id="editor-container">
   <canvas id="editor"></canvas>
+  <!--<el-input-number size="small" v-model="width"></el-input-number>
+  <el-input-number size="small" v-model="height"></el-input-number>
+  <el-input-number size="small" v-model="zoom"></el-input-number>-->
+
+
 </section>
 
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 
-// var cropper = new Cropper(canvas, {
-//   aspectRatio: 16 / 9,
-//   crop: function (e) {
-//     console.log(e.detail.x);
-//     console.log(e.detail.y);
-//     console.log(e.detail.width);
-//     console.log(e.detail.height);
-//     console.log(e.detail.rotate);
-//     console.log(e.detail.scaleX);
-//     console.log(e.detail.scaleY);
-//   }
-// });
 
 
 
@@ -28,30 +22,101 @@
 export default {
   data() {
     return {
+      cwidth: null,
+      cheight: null,
+      canvas: {},
+      zoom: null,
     };
   },
   computed: {
+    // zoom: ()=>{
+    //   this.zoom = this.canvas.getZoom();
+    // }
+    // ...mapGetters([
+    //   'getCanvas',
+    // ])
+    
   },
   watch: {
+    // height: function (newHeight) {
+    //   this.canvas.setDimensions({
+    //     cwidth: this.width,
+    //     cheight: newHeight
+    //   });
+    // },
+    // width: function (newWidth) {
+    //   this.canvas.setDimensions({
+    //     cwidth: newWidth,
+    //     cheight: this.height
+    //   });
+    // },
+    // zoom: function(newZoom){
+    //   this.canvas.setZoom(newZoom);
+    // }
   },
   methods: {
   },
   mounted: function () {
-    let canvas = document.getElementById('editor');
+  
 
-    canvas = new fabric.Canvas('editor');
-    canvas.setBackgroundColor('rgba(255, 73, 64, 0.6)', canvas.renderAll.bind(canvas));
+    const _this = this; // we save the scope
+    // we get the size of the canvas container to adjust it to it
+    let width = document.getElementById('editor-container').offsetWidth;
+    let height = document.getElementById('editor-container').offsetHeight;
+
+    this.canvas = new fabric.Canvas('editor');
+    this.canvas.setDimensions({
+      width: width,
+      height: height,
+    });
+
     // create a rectangle object
     let rect = new fabric.Rect({
       left: 100,
       top: 100,
       fill: 'red',
-      width: 20,
-      height: 20
+      width: 100,
+      height: 100
     });
 
-    // "add" rectangle onto canvas
-    canvas.add(rect);
+    // listen to windows resize
+    window.addEventListener('resize', resizeCanvas, false);
+
+    function resizeCanvas(){
+      
+      let newWidth = document.getElementById('editor-container').offsetWidth;
+      let newHeight = document.getElementById('editor-container').offsetHeight
+      let scalY = (canvas.getWidth() / canvas.getHeight()) * newHeight;
+      let scalX = (canvas.getHeight() / canvas.getWidth()) * newWidth;
+
+       // we redrwa all the objects to keep the quality
+      reDraw(scalX, scalY);
+
+     canvas.setWidth(canvas.getWidth() * scalX);
+     canvas.setHeight(canvas.getHeight() * scalY);
+     canvas.renderAll();
+     canvas.calcOffset();
+     
+    }
+
+    function reDraw(scalX, scalY) {
+
+      let objects = _this.canvas.getObjects();
+      for (var i in objects) {
+        objects[i].scaleX = objects[i].scaleX * scalX;
+        objects[i].scaleY = objects[i].scaleY * scalY;
+        objects[i].left = objects[i].left * scalX;
+        objects[i].top = objects[i].top * scalY;
+        objects[i].setCoords();
+      }
+    }
+
+    resizeCanvas();
+   // "add" rectangle onto canvas
+    _this.canvas.add(rect);
+    _this.canvas.viewportCenterObject(rect); 
+
+  
   },
 };
 </script>
