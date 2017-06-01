@@ -70,6 +70,13 @@ export default {
       height: height,
     });
 
+    this.canvas.setBackgroundColor({
+      source: './assets/img/opbg.jpg',
+      repeat: 'repeat',
+      width: 10,
+      height: 10,
+    }, _this.canvas.renderAll.bind(_this.canvas));
+
     // create a rectangle object
     let rect = new fabric.Rect({
       left: 100,
@@ -83,20 +90,19 @@ export default {
     window.addEventListener('resize', resizeCanvas, false);
 
     function resizeCanvas(){
-      
       let newWidth = document.getElementById('editor-container').offsetWidth;
       let newHeight = document.getElementById('editor-container').offsetHeight
+
       let scalY = (canvas.getWidth() / canvas.getHeight()) * newHeight;
       let scalX = (canvas.getHeight() / canvas.getWidth()) * newWidth;
 
-       // we redrwa all the objects to keep the quality
+      // we redrwa all the objects to keep the quality
       reDraw(scalX, scalY);
-
-     canvas.setWidth(canvas.getWidth() * scalX);
-     canvas.setHeight(canvas.getHeight() * scalY);
-     canvas.renderAll();
-     canvas.calcOffset();
-     
+      canvas.setWidth(canvas.getWidth() * scalX);
+      canvas.setHeight(canvas.getHeight() * scalY);
+      canvas.renderAll();
+      canvas.calcOffset();
+      
     }
 
     function reDraw(scalX, scalY) {
@@ -109,6 +115,7 @@ export default {
         objects[i].top = objects[i].top * scalY;
         objects[i].setCoords();
       }
+      
     }
 
     resizeCanvas();
